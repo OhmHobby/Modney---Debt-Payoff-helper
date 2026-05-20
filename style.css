@@ -202,6 +202,14 @@ button { cursor: pointer; border: none; background: none; }
   padding: 28px 20px 24px;
   text-align: center;
 }
+.hero-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 3px solid rgba(255,255,255,0.4);
+  object-fit: cover;
+  margin-bottom: 8px;
+}
 .hero-name {
   font-size: 14px;
   font-weight: 600;
