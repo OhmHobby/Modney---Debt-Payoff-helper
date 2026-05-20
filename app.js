@@ -10,6 +10,38 @@ const HISTORY_KEY = 'ev_history_v1';
 const CLOUD_URL   = 'https://script.google.com/macros/s/AKfycbyO7MNJWx5fKe1Cgg2Fd0kI5BbI4OcudmNRFQvVyaI30FmIgwDs1hhPpsw6YbAOYHQD/exec';
 const USER_ID_KEY = 'ev_user_id';
 
+// LINE LIFF — paste your LIFF ID after creating the app in LINE Developers Console
+const LIFF_ID = '2010149680-06k9NZMA';
+
+async function initLiff() {
+  if (!LIFF_ID) return;
+  try {
+    await liff.init({ liffId: LIFF_ID });
+    if (!liff.isLoggedIn()) return;
+    const lineProfile = await liff.getProfile();
+    localStorage.setItem(USER_ID_KEY, lineProfile.userId);
+
+    // Try restoring from cloud first (returning user)
+    const cloud = await loadFromCloud();
+    if (cloud && cloud.profile) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(cloud.profile));
+      localStorage.setItem(HISTORY_KEY, JSON.stringify(cloud.history || []));
+      return;
+    }
+
+    // New LINE user — seed profile with their display name so setup screen is skipped
+    if (!loadProfile()) {
+      saveProfile({
+        name: lineProfile.displayName,
+        occupation: '',
+        debts: [], income: 0, initialCash: 0, expenses: [],
+        investments: [], mode: 'pure',
+        emergencyFund: { monthlyContrib: 0, target: 0 },
+      });
+    }
+  } catch (_) { /* fall back to UUID + normal flow silently */ }
+}
+
 function getOrCreateUserId() {
   let id = localStorage.getItem(USER_ID_KEY);
   if (!id) {
@@ -1425,7 +1457,8 @@ function confirmReset() {
 // ═══════════════════════════════════════════════════════════════════
 // INIT — check localStorage on load
 // ═══════════════════════════════════════════════════════════════════
-(function init() {
+(async function init() {
+  await initLiff();
   buildInvestList();
   updateSyncBar();
   const profile = loadProfile();
