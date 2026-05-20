@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Escape Velocity</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ═══ LANDING ═══════════════════════════════════════════ -->
+<div id="screen-landing" class="screen active">
+  <div class="landing-hero">
+    <div class="orbit-ring ring-1"></div>
+    <div class="orbit-ring ring-2"></div>
+    <div class="orbit-ring ring-3"></div>
+    <div class="landing-content">
+      <div class="brand-badge">Refinn × Physics Hackathon</div>
+      <h1 class="landing-title">Escape<br>Velocity</h1>
+      <p class="landing-sub">Your debt is a gravitational field.<br>We calculate the optimal path out.</p>
+      <button class="btn-cta" onclick="startSetup()">Begin Mission →</button>
+      <p class="landing-hint">Free · Saved to your device · Built for Thailand</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SETUP ═══════════════════════════════════════════════ -->
+<div id="screen-setup" class="screen">
+  <div class="setup-shell">
+    <div class="setup-welcome">
+      <div class="setup-logo">🚀</div>
+      <h2 class="setup-title">Before we launch</h2>
+      <p class="setup-hint">Just so we know who's flying.</p>
+    </div>
+    <div class="setup-form">
+      <div class="field-group">
+        <label>Your name</label>
+        <input type="text" id="su-name" placeholder="e.g. Prae" autocomplete="given-name">
+      </div>
+      <div class="field-group">
+        <label>Occupation <span style="font-weight:400;color:var(--muted)">(optional)</span></label>
+        <input type="text" id="su-occupation" placeholder="e.g. Nurse, Freelancer, Student">
+      </div>
+    </div>
+    <div class="setup-footer">
+      <button class="btn-cta w-full" onclick="completeSetup()">Enter Mission Control →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ HOME APP ══════════════════════════════════════════ -->
+<div id="screen-home" class="screen">
+  <div class="app-root">
+
+    <!-- Top bar -->
+    <header class="topbar">
+      <span class="topbar-logo">🚀 Escape Velocity</span>
+      <button class="icon-btn topbar-reset" onclick="confirmReset()" title="Reset data">↺</button>
+    </header>
+
+    <!-- Scrollable content -->
+    <main class="main-scroll" id="main-scroll">
+
+      <!-- ── PROFILE TAB ──────────────────────────────── -->
+      <div id="tab-profile" class="tab-pane active">
+
+        <div class="profile-hero" id="profile-hero">
+          <div class="hero-name" id="hero-name"></div>
+          <div class="hero-label">Total debt</div>
+          <div class="hero-total" id="hero-total">฿0</div>
+          <div class="hero-chips" id="hero-chips"></div>
+        </div>
+
+        <!-- Debts section -->
+        <div class="section-card" id="sec-debts">
+          <div class="section-hdr" onclick="toggleSection('debts')">
+            <div>
+              <div class="section-title">My Debts</div>
+              <div class="section-sub" id="sub-debts">No debts added</div>
+            </div>
+            <span class="chevron" id="chev-debts">›</span>
+          </div>
+          <div class="section-body" id="body-debts">
+            <div id="debt-cards"></div>
+            <button class="btn-add" onclick="addDebt()">+ Add Debt</button>
+          </div>
+        </div>
+
+        <!-- Income section -->
+        <div class="section-card" id="sec-income">
+          <div class="section-hdr" onclick="toggleSection('income')">
+            <div>
+              <div class="section-title">Income & Cash</div>
+              <div class="section-sub" id="sub-income">Not set</div>
+            </div>
+            <span class="chevron" id="chev-income">›</span>
+          </div>
+          <div class="section-body" id="body-income">
+            <div class="field-group">
+              <label>Monthly take-home income (฿)</label>
+              <input type="number" id="income" placeholder="35000" min="0" oninput="refreshHero()">
+            </div>
+            <div class="field-group">
+              <label>Cash on hand right now (฿)</label>
+              <input type="number" id="initial-cash" placeholder="0" min="0">
+              <span class="field-hint">Applied to highest-priority debt before month 1</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Expenses section -->
+        <div class="section-card" id="sec-expenses">
+          <div class="section-hdr" onclick="toggleSection('expenses')">
+            <div>
+              <div class="section-title">Monthly Expenses</div>
+              <div class="section-sub" id="sub-expenses">None added</div>
+            </div>
+            <span class="chevron" id="chev-expenses">›</span>
+          </div>
+          <div class="section-body" id="body-expenses">
+            <div id="expense-list"></div>
+            <button class="btn-add" onclick="addExpense()">+ Add Expense</button>
+          </div>
+        </div>
+
+        <!-- Investments section -->
+        <div class="section-card" id="sec-invest">
+          <div class="section-hdr" onclick="toggleSection('invest')">
+            <div>
+              <div class="section-title">Investments</div>
+              <div class="section-sub" id="sub-invest">None selected</div>
+            </div>
+            <span class="chevron" id="chev-invest">›</span>
+          </div>
+          <div class="section-body" id="body-invest">
+            <p class="field-hint" style="margin-bottom:14px">These run alongside debt payoff from day one, compounding continuously.</p>
+            <div id="invest-list"></div>
+          </div>
+        </div>
+
+        <!-- Mode section -->
+        <div class="section-card" id="sec-mode">
+          <div class="section-hdr" onclick="toggleSection('mode')">
+            <div>
+              <div class="section-title">Simulation Mode</div>
+              <div class="section-sub" id="sub-mode">Pure Optimizer</div>
+            </div>
+            <span class="chevron" id="chev-mode">›</span>
+          </div>
+          <div class="section-body" id="body-mode">
+            <div class="mode-toggle">
+              <button class="mode-btn active" id="mode-pure-btn" onclick="setMode('pure')">
+                <strong>Pure Optimizer</strong>
+                <span>Maximum math efficiency</span>
+              </button>
+              <button class="mode-btn" id="mode-risk-btn" onclick="setMode('risk_adjusted')">
+                <strong>Risk-Adjusted</strong>
+                <span>With emergency fund buffer</span>
+              </button>
+            </div>
+            <div id="ef-fields" style="display:none;margin-top:14px;">
+              <div class="field-group">
+                <label>Emergency fund contribution (฿/mo)</label>
+                <input type="number" id="ef-contrib" placeholder="2000" min="0">
+              </div>
+              <div class="field-group">
+                <label>Emergency fund target (฿ total)</label>
+                <input type="number" id="ef-target" placeholder="45000" min="0">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="height:130px"></div>
+      </div><!-- /tab-profile -->
+
+      <!-- ── ROADMAP TAB ──────────────────────────────── -->
+      <div id="tab-roadmap" class="tab-pane">
+
+        <div id="roadmap-loading" class="loading-state" style="display:none;">
+          <div class="loading-spinner"></div>
+          <p>Calculating escape trajectory…</p>
+        </div>
+
+        <div id="roadmap-empty" class="empty-state">
+          <div class="empty-icon">🚀</div>
+          <p>Save your profile to see your escape roadmap.</p>
+          <button class="btn-cta" onclick="switchTab('profile')">Go to Profile →</button>
+        </div>
+
+        <div id="roadmap-content" style="display:none;">
+
+          <div id="refinancing-alert" class="alert-card alert-warning" style="display:none;">
+            <div class="alert-icon">⚠</div>
+            <div class="alert-body">
+              <strong id="refi-title"></strong>
+              <p id="refi-message"></p>
+              <div id="refi-comparison" class="refi-comparison"></div>
+            </div>
+          </div>
+
+          <div class="stat-grid" id="stat-grid"></div>
+
+          <div class="card chart-card">
+            <div class="card-title">Debt Balance Over Time</div>
+            <canvas id="trajectory-chart" height="220"></canvas>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Gravitational Pull — Priority Order</div>
+            <p class="card-sub">Ranked by true cost. Paid in this order.</p>
+            <div id="priority-table"></div>
+          </div>
+
+          <div class="card" id="cuts-card" style="display:none;">
+            <div class="card-title">Recommended Cuts</div>
+            <p class="card-sub">Free up monthly thrust for debt payoff.</p>
+            <div id="cuts-list"></div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Mission Control</div>
+            <p class="card-sub">Key events on your trajectory.</p>
+            <div id="mission-control"></div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Monthly Roadmap</div>
+            <p class="card-sub">Every baht, every month.</p>
+            <div id="monthly-roadmap"></div>
+          </div>
+
+          <div class="escape-message card" id="escape-message" style="display:none;">
+            <div class="escape-icon">🚀</div>
+            <div id="escape-text"></div>
+          </div>
+
+          <div style="height:130px"></div>
+        </div>
+      </div><!-- /tab-roadmap -->
+
+    </main><!-- /main-scroll -->
+
+    <!-- FAB -->
+    <button class="fab" id="fab" onclick="saveAndRecalculate()">
+      <span id="fab-icon">💾</span>
+      <span id="fab-label">Save & Calculate</span>
+    </button>
+
+    <!-- Bottom nav -->
+    <nav class="bottom-nav">
+      <button class="nav-tab active" id="nav-profile" onclick="switchTab('profile')">
+        <div class="nav-icon">👤</div>
+        <div class="nav-label">Profile</div>
+      </button>
+      <button class="nav-tab" id="nav-roadmap" onclick="switchTab('roadmap')">
+        <div class="nav-icon">🚀</div>
+        <div class="nav-label">Roadmap</div>
+      </button>
+    </nav>
+
+  </div>
+</div><!-- /screen-home -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="charts.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
