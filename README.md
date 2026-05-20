@@ -1,6 +1,6 @@
-# 🚀 Escape Velocity — Financial Flight Simulator
+# 🐜 มดหนี้ — เพื่อนตัวน้อยช่วยปลดหนี้
 
-> Your debt is a gravitational field. We calculate the optimal path out.
+> ใช้มดปลดหนี้ วางแผนจัดการหนี้สิน กับเพื่อนตัวน้อยอย่างเป็นระบบ
 
 Built for the **Refinn × Physics Hackathon** (SCBX audience).
 
@@ -8,7 +8,7 @@ Built for the **Refinn × Physics Hackathon** (SCBX audience).
 
 ## What it does
 
-Escape Velocity treats Thai household debt as an orbital mechanics problem. Enter your debts, income, and expenses — the app finds the mathematically optimal payoff order and shows you a month-by-month roadmap to zero debt.
+มดหนี้ helps Thai households tackle debt systematically. Enter your debts, income, and expenses — the app finds the mathematically optimal payoff order and shows you a month-by-month roadmap to zero debt.
 
 - **Debt priority scoring** — ranks debts by true cost, not just balance. หนี้นอกระบบ gets a safety multiplier and is always paid first.
 - **Rate interval support** — enter interest as % per day, week, month, or year. Live APR conversion so you always know the real cost.
@@ -21,7 +21,7 @@ Escape Velocity treats Thai household debt as an orbital mechanics problem. Ente
 
 ## Using the app
 
-Open the hosted page, enter your name, then fill in your debts and income on the Profile tab. Hit **Save & Calculate** — your escape trajectory appears on the Roadmap tab.
+Open the hosted page, enter your name, then fill in your debts and income on the Profile tab. Hit **Save & Calculate** — your debt payoff plan appears on the แผน tab.
 
 > **Note:** The optimizer runs on a private API. The app works when the API server is online. If you see an "API unreachable" error, the server may be temporarily offline.
 

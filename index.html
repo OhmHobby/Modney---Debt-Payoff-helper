@@ -6,36 +6,33 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <title>Escape Velocity</title>
+  <title>มดหนี้</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- ═══ LANDING ═══════════════════════════════════════════ -->
+<!-- ═══ LANDING ═══════════════════════════════════════════════════ -->
 <div id="screen-landing" class="screen active">
   <div class="landing-hero">
-    <div class="orbit-ring ring-1"></div>
-    <div class="orbit-ring ring-2"></div>
-    <div class="orbit-ring ring-3"></div>
     <div class="landing-content">
       <div class="brand-badge">Refinn × Physics Hackathon</div>
-      <h1 class="landing-title">Escape<br>Velocity</h1>
-      <p class="landing-sub">Your debt is a gravitational field.<br>We calculate the optimal path out.</p>
-      <button class="btn-cta" onclick="startSetup()">Begin Mission →</button>
-      <p class="landing-hint">Free · Saved to your device · Built for Thailand</p>
+      <h1 class="landing-title">มดหนี้</h1>
+      <p class="landing-sub">เพื่อนตัวน้อยช่วยวางแผนปลดหนี้<br>ทีละบาท ทีละเดือน อย่างเป็นระบบ</p>
+      <button class="btn-cta" onclick="startSetup()">เริ่มเลย →</button>
+      <p class="landing-hint">ฟรี · เก็บข้อมูลในเครื่องคุณ · สร้างเพื่อคนไทย</p>
     </div>
   </div>
 </div>
 
-<!-- ═══ SETUP ═══════════════════════════════════════════════ -->
+<!-- ═══ SETUP ═══════════════════════════════════════════════════════ -->
 <div id="screen-setup" class="screen">
   <div class="setup-shell">
     <div class="setup-welcome">
-      <div class="setup-logo">🚀</div>
-      <h2 class="setup-title">Before we launch</h2>
-      <p class="setup-hint">Just so we know who's flying.</p>
+      <div class="setup-logo">🐜</div>
+      <h2 class="setup-title">ยินดีต้อนรับ!</h2>
+      <p class="setup-hint">บอกเราสักนิด ใครกำลังใช้มดหนี้อยู่?</p>
     </div>
     <div class="setup-form">
       <div class="field-group">
@@ -48,25 +45,27 @@
       </div>
     </div>
     <div class="setup-footer">
-      <button class="btn-cta w-full" onclick="completeSetup()">Enter Mission Control →</button>
+      <button class="btn-cta w-full" onclick="completeSetup()">เข้าสู่แอป →</button>
     </div>
   </div>
 </div>
 
-<!-- ═══ HOME APP ══════════════════════════════════════════ -->
+<!-- ═══ HOME APP ═══════════════════════════════════════════════════ -->
 <div id="screen-home" class="screen">
   <div class="app-root">
 
-    <!-- Top bar -->
     <header class="topbar">
-      <span class="topbar-logo">🚀 Escape Velocity</span>
-      <button class="icon-btn topbar-reset" onclick="confirmReset()" title="Reset data">↺</button>
+      <span class="topbar-logo">🐜 มดหนี้</span>
+      <button class="icon-btn topbar-reset" onclick="confirmReset()" title="Reset">↺</button>
     </header>
 
-    <!-- Scrollable content -->
+    <div id="sync-bar" class="sync-bar" style="display:none;">
+      ⚠ ข้อมูลบันทึกในเครื่องเท่านั้น — ตั้งค่า Cloud Sync เพื่อสำรองข้อมูล
+    </div>
+
     <main class="main-scroll" id="main-scroll">
 
-      <!-- ── PROFILE TAB ──────────────────────────────── -->
+      <!-- ── PROFILE TAB ──────────────────────────────────────────── -->
       <div id="tab-profile" class="tab-pane active">
 
         <div class="profile-hero" id="profile-hero">
@@ -74,15 +73,12 @@
           <div class="hero-label">Total debt</div>
           <div class="hero-total" id="hero-total">฿0</div>
           <div class="hero-chips" id="hero-chips"></div>
+          <div class="progress-strip" id="progress-strip" style="display:none;"></div>
         </div>
 
-        <!-- Debts section -->
         <div class="section-card" id="sec-debts">
           <div class="section-hdr" onclick="toggleSection('debts')">
-            <div>
-              <div class="section-title">My Debts</div>
-              <div class="section-sub" id="sub-debts">No debts added</div>
-            </div>
+            <div><div class="section-title">My Debts</div><div class="section-sub" id="sub-debts">No debts added</div></div>
             <span class="chevron" id="chev-debts">›</span>
           </div>
           <div class="section-body" id="body-debts">
@@ -91,13 +87,9 @@
           </div>
         </div>
 
-        <!-- Income section -->
         <div class="section-card" id="sec-income">
           <div class="section-hdr" onclick="toggleSection('income')">
-            <div>
-              <div class="section-title">Income & Cash</div>
-              <div class="section-sub" id="sub-income">Not set</div>
-            </div>
+            <div><div class="section-title">Income & Cash</div><div class="section-sub" id="sub-income">Not set</div></div>
             <span class="chevron" id="chev-income">›</span>
           </div>
           <div class="section-body" id="body-income">
@@ -113,13 +105,9 @@
           </div>
         </div>
 
-        <!-- Expenses section -->
         <div class="section-card" id="sec-expenses">
           <div class="section-hdr" onclick="toggleSection('expenses')">
-            <div>
-              <div class="section-title">Monthly Expenses</div>
-              <div class="section-sub" id="sub-expenses">None added</div>
-            </div>
+            <div><div class="section-title">Monthly Expenses</div><div class="section-sub" id="sub-expenses">None added</div></div>
             <span class="chevron" id="chev-expenses">›</span>
           </div>
           <div class="section-body" id="body-expenses">
@@ -128,13 +116,9 @@
           </div>
         </div>
 
-        <!-- Investments section -->
         <div class="section-card" id="sec-invest">
           <div class="section-hdr" onclick="toggleSection('invest')">
-            <div>
-              <div class="section-title">Investments</div>
-              <div class="section-sub" id="sub-invest">None selected</div>
-            </div>
+            <div><div class="section-title">Investments</div><div class="section-sub" id="sub-invest">None selected</div></div>
             <span class="chevron" id="chev-invest">›</span>
           </div>
           <div class="section-body" id="body-invest">
@@ -143,13 +127,9 @@
           </div>
         </div>
 
-        <!-- Mode section -->
         <div class="section-card" id="sec-mode">
           <div class="section-hdr" onclick="toggleSection('mode')">
-            <div>
-              <div class="section-title">Simulation Mode</div>
-              <div class="section-sub" id="sub-mode">Pure Optimizer</div>
-            </div>
+            <div><div class="section-title">Simulation Mode</div><div class="section-sub" id="sub-mode">Pure Optimizer</div></div>
             <span class="chevron" id="chev-mode">›</span>
           </div>
           <div class="section-body" id="body-mode">
@@ -179,21 +159,31 @@
         <div style="height:130px"></div>
       </div><!-- /tab-profile -->
 
-      <!-- ── ROADMAP TAB ──────────────────────────────── -->
+      <!-- ── ROADMAP TAB ───────────────────────────────────────────── -->
       <div id="tab-roadmap" class="tab-pane">
 
         <div id="roadmap-loading" class="loading-state" style="display:none;">
           <div class="loading-spinner"></div>
-          <p>Calculating escape trajectory…</p>
+          <p>กำลังวางแผนเส้นทาง…</p>
         </div>
 
         <div id="roadmap-empty" class="empty-state">
-          <div class="empty-icon">🚀</div>
-          <p>Save your profile to see your escape roadmap.</p>
-          <button class="btn-cta" onclick="switchTab('profile')">Go to Profile →</button>
+          <div class="empty-icon">🗺</div>
+          <p>บันทึกข้อมูลของคุณเพื่อดูแผนปลดหนี้</p>
+          <button class="btn-cta" onclick="switchTab('profile')">ไปที่โปรไฟล์ →</button>
         </div>
 
         <div id="roadmap-content" style="display:none;">
+
+          <div id="companion-card" class="companion-card" style="display:none;">
+            <div class="companion-ant">🐜</div>
+            <div class="companion-body">
+              <div class="companion-msg" id="companion-msg"></div>
+              <div class="companion-algo" id="companion-algo"></div>
+            </div>
+          </div>
+
+          <div class="roadmap-stat-strip" id="roadmap-stat-strip"></div>
 
           <div id="refinancing-alert" class="alert-card alert-warning" style="display:none;">
             <div class="alert-icon">⚠</div>
@@ -204,68 +194,140 @@
             </div>
           </div>
 
-          <div class="stat-grid" id="stat-grid"></div>
-
-          <div class="card chart-card">
-            <div class="card-title">Debt Balance Over Time</div>
-            <canvas id="trajectory-chart" height="220"></canvas>
-          </div>
-
-          <div class="card">
-            <div class="card-title">Gravitational Pull — Priority Order</div>
-            <p class="card-sub">Ranked by true cost. Paid in this order.</p>
-            <div id="priority-table"></div>
-          </div>
-
-          <div class="card" id="cuts-card" style="display:none;">
-            <div class="card-title">Recommended Cuts</div>
-            <p class="card-sub">Free up monthly thrust for debt payoff.</p>
-            <div id="cuts-list"></div>
-          </div>
-
-          <div class="card">
-            <div class="card-title">Mission Control</div>
-            <p class="card-sub">Key events on your trajectory.</p>
-            <div id="mission-control"></div>
-          </div>
-
-          <div class="card">
-            <div class="card-title">Monthly Roadmap</div>
-            <p class="card-sub">Every baht, every month.</p>
-            <div id="monthly-roadmap"></div>
-          </div>
-
-          <div class="escape-message card" id="escape-message" style="display:none;">
-            <div class="escape-icon">🚀</div>
-            <div id="escape-text"></div>
+          <div class="tl-shell">
+            <button class="tl-log-btn" onclick="openEventLogger()">+ บันทึกสิ่งที่เปลี่ยนแปลง</button>
+            <div class="timeline" id="timeline"></div>
           </div>
 
           <div style="height:130px"></div>
         </div>
       </div><!-- /tab-roadmap -->
 
-    </main><!-- /main-scroll -->
+      <!-- ── ANALYSIS TAB ──────────────────────────────────────────── -->
+      <div id="tab-analysis" class="tab-pane">
 
-    <!-- FAB -->
-    <button class="fab" id="fab" onclick="saveAndRecalculate()">
+        <div id="analysis-empty" class="empty-state">
+          <div class="empty-icon">📊</div>
+          <p>คำนวณแผนก่อนเพื่อดู Analysis</p>
+          <button class="btn-cta" onclick="switchTab('profile')">ไปที่โปรไฟล์ →</button>
+        </div>
+
+        <div id="analysis-content" style="display:none;">
+
+          <div class="card chart-card" style="margin-top:12px;">
+            <div class="card-title">Debt Balance Over Time</div>
+            <canvas id="trajectory-chart" height="220"></canvas>
+          </div>
+
+          <div class="card">
+            <div class="card-title">มดช่วยประหยัดได้</div>
+            <p class="card-sub">เทียบกับการจ่ายขั้นต่ำตลอดไป</p>
+            <div id="savings-grid" class="savings-grid"></div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">ลำดับความสำคัญของหนี้</div>
+            <p class="card-sub">มดเรียงจากแพงสุดไปถูกสุด — ทุกบาทส่วนเกินกองที่อันดับ 1 จนหมด แล้วไล่ลงไป</p>
+            <div id="priority-table"></div>
+          </div>
+
+          <div class="card" id="cuts-card" style="display:none;">
+            <div class="card-title">รายจ่ายที่ตัดได้</div>
+            <p class="card-sub">ลดค่าใช้จ่ายเพื่อเพิ่มเงินชำระหนี้ต่อเดือน</p>
+            <div id="cuts-list"></div>
+          </div>
+
+          <div class="card" id="lifestyle-card" style="display:none;">
+            <div class="card-title">ดอกเบี้ยของคุณเทียบเท่ากับ</div>
+            <p class="card-sub">ทำให้ตัวเลขเป็นเรื่องจริงในชีวิต</p>
+            <div id="lifestyle-list"></div>
+          </div>
+
+          <div style="height:130px"></div>
+        </div>
+      </div><!-- /tab-analysis -->
+
+      <!-- ── PROGRESS TAB ──────────────────────────────────────────── -->
+      <div id="tab-progress" class="tab-pane">
+
+        <div id="progress-empty" class="empty-state">
+          <div class="empty-icon">🐜</div>
+          <p>ยังไม่มีประวัติ — บันทึกครั้งแรกแล้วมดจะเก็บไว้ให้</p>
+          <button class="btn-cta" onclick="switchTab('profile')">เริ่มเลย →</button>
+        </div>
+
+        <div id="progress-content" style="display:none;">
+          <div class="companion-card" id="progress-companion" style="margin-top:12px; display:none;">
+            <div class="companion-ant">🐜</div>
+            <div class="companion-body">
+              <div class="companion-msg" id="progress-companion-msg"></div>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:8px;">
+            <div class="card-title">เส้นทางของคุณ</div>
+            <p class="card-sub">ทุกครั้งที่บันทึก มดจะเก็บภาพตัดขวางไว้</p>
+            <div id="history-list"></div>
+          </div>
+
+          <div style="height:130px"></div>
+        </div>
+      </div><!-- /tab-progress -->
+
+    </main>
+
+    <button class="fab" id="fab" onclick="fabAction()">
       <span id="fab-icon">💾</span>
       <span id="fab-label">Save & Calculate</span>
     </button>
 
-    <!-- Bottom nav -->
     <nav class="bottom-nav">
       <button class="nav-tab active" id="nav-profile" onclick="switchTab('profile')">
         <div class="nav-icon">👤</div>
         <div class="nav-label">Profile</div>
       </button>
       <button class="nav-tab" id="nav-roadmap" onclick="switchTab('roadmap')">
-        <div class="nav-icon">🚀</div>
+        <div class="nav-icon">🗺</div>
         <div class="nav-label">Roadmap</div>
+      </button>
+      <button class="nav-tab" id="nav-analysis" onclick="switchTab('analysis')">
+        <div class="nav-icon">📊</div>
+        <div class="nav-label">Analysis</div>
+      </button>
+      <button class="nav-tab" id="nav-progress" onclick="switchTab('progress')">
+        <div class="nav-icon">🐜</div>
+        <div class="nav-label">Progress</div>
       </button>
     </nav>
 
   </div>
 </div><!-- /screen-home -->
+
+<!-- ═══ EVENT LOGGER MODAL ══════════════════════════════════════════ -->
+<div id="event-modal" class="modal-overlay" style="display:none;" onclick="closeEventLogger(event)">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <div class="modal-hdr">
+      <span class="modal-title">บันทึกสิ่งที่เปลี่ยนแปลง</span>
+      <button class="modal-close" onclick="closeEventLogger()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="event-type-grid" id="event-type-grid"></div>
+      <div id="event-quick-input" style="display:none;margin-top:14px;">
+        <div class="field-group">
+          <label id="event-input-label">Amount (฿)</label>
+          <input type="number" id="event-input-val" placeholder="0" min="0">
+        </div>
+      </div>
+      <div class="field-group" style="margin-top:14px;">
+        <label>รายละเอียด (optional)</label>
+        <input type="text" id="event-desc" placeholder="e.g. ได้งานใหม่ เงินเดือนเพิ่ม ฿5,000">
+      </div>
+      <button class="btn-cta w-full" style="margin-top:16px;border-radius:var(--radius-sm);" onclick="submitEvent()">บันทึก</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="charts.js"></script>
