@@ -17,7 +17,7 @@ async function initLiff() {
   if (!LIFF_ID) return;
   try {
     await liff.init({ liffId: LIFF_ID });
-    if (!liff.isLoggedIn()) return;
+    if (!liff.isInClient() && !liff.isLoggedIn()) return;
     const lineProfile = await liff.getProfile();
     localStorage.setItem(USER_ID_KEY, lineProfile.userId);
 
