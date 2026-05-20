@@ -17,8 +17,12 @@ async function initLiff() {
   if (!LIFF_ID) return;
   try {
     await liff.init({ liffId: LIFF_ID });
-    if (!liff.isInClient() && !liff.isLoggedIn()) return;
+    const inClient = liff.isInClient();
+    const loggedIn = liff.isLoggedIn();
+    showToast(`LIFF: inClient=${inClient} loggedIn=${loggedIn}`);
+    if (!inClient && !loggedIn) return;
     const lineProfile = await liff.getProfile();
+    showToast(`LINE: ${lineProfile.displayName}`);
     localStorage.setItem(USER_ID_KEY, lineProfile.userId);
 
     // Try restoring from cloud first (returning user)
@@ -26,6 +30,7 @@ async function initLiff() {
     if (cloud && cloud.profile) {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(cloud.profile));
       localStorage.setItem(HISTORY_KEY, JSON.stringify(cloud.history || []));
+      showToast('Cloud data restored');
       return;
     }
 
@@ -38,8 +43,11 @@ async function initLiff() {
         investments: [], mode: 'pure',
         emergencyFund: { monthlyContrib: 0, target: 0 },
       });
+      showToast('New profile seeded');
     }
-  } catch (_) { /* fall back to UUID + normal flow silently */ }
+  } catch (err) {
+    showToast(`LIFF error: ${err.message}`, 'warning');
+  }
 }
 
 function getOrCreateUserId() {
