@@ -1,6 +1,6 @@
 // มดหนี้ — App v10 (4-tab UI: Profile / Roadmap / Analysis / Progress)
-const API_BASE = 'https://exorcism-private-exception.ngrok-free.dev';
-const HEADERS  = { 'Content-Type': 'application/json', 'ngrok-skip-browser-warning': 'true' };
+const API_BASE = 'https://payoff-optimizer.onrender.com';
+const HEADERS  = { 'Content-Type': 'application/json' };
 
 const STORAGE_KEY = 'ev_profile_v1';
 const RESULT_KEY  = 'ev_result_v1';
@@ -1192,7 +1192,7 @@ function renderStatGrid(result) {
     <div class="stat-card success">
       <div class="stat-label">Interest Saved</div>
       <div class="stat-value" style="font-size:20px">${fmt(result.totalInterestSaved)}</div>
-      <div class="stat-sub">vs minimums</div>
+      <div class="stat-sub">vs minimums only</div>
     </div>
     <div class="stat-card" style="border:1px solid var(--danger-l);background:var(--danger-l)">
       <div class="stat-label" style="color:var(--danger)">Interest Cost</div>
